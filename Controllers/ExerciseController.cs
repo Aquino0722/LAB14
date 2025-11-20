@@ -20,6 +20,8 @@ public class ExercisesController : ControllerBase
         _mapper = mapper;
     }
 
+    // --- Endpoints de la Parte 1 (Ejercicios 1-12) ---
+
     // GET api/exercises/1/clients-by-name?name=Juan
     [HttpGet("1/clients-by-name")]
     public async Task<IActionResult> GetClientsByName([FromQuery] string name)
@@ -123,5 +125,63 @@ public class ExercisesController : ControllerBase
     {
         var clients = await _unitOfWork.Clients.GetClientsWhoBoughtProductAsync(productId);
         return Ok(clients);
+    }
+
+    // --- Endpoints de la Parte 2 (Ejercicios 13-19) ---
+
+    // GET api/exercises/13/client-orders
+    [HttpGet("13/client-orders")]
+    public async Task<IActionResult> GetClientOrders()
+    {
+        var result = await _unitOfWork.Clients.GetClientOrdersAsync();
+        return Ok(result);
+    }
+
+    // GET api/exercises/14/orders-with-product-details
+    [HttpGet("14/orders-with-product-details")]
+    public async Task<IActionResult> GetOrdersWithProductDetails()
+    {
+        var result = await _unitOfWork.Orders.GetOrdersWithProductDetailsAsync();
+        return Ok(result);
+    }
+    
+    // GET api/exercises/15/clients-product-count
+    [HttpGet("15/clients-product-count")]
+    public async Task<IActionResult> GetClientsWithProductCount()
+    {
+        var result = await _unitOfWork.Clients.GetClientsWithProductCountAsync();
+        return Ok(result);
+    }
+    
+    // GET api/exercises/16/sales-by-client
+    [HttpGet("16/sales-by-client")]
+    public async Task<IActionResult> GetSalesByClient()
+    {
+        var result = await _unitOfWork.Orders.GetSalesByClientAsync();
+        return Ok(result);
+    }
+    
+    // GET api/exercises/17/best-selling-product
+    [HttpGet("17/best-selling-product")]
+    public async Task<IActionResult> GetBestSellingProduct()
+    {
+        var product = await _unitOfWork.Products.GetBestSellingProductAsync();
+        return Ok(product);
+    }
+    
+    // GET api/exercises/18/inactive-clients-since/2025-05-03
+    [HttpGet("18/inactive-clients-since/{date}")]
+    public async Task<IActionResult> GetInactiveClientsSince(DateTime date)
+    {
+        var clients = await _unitOfWork.Clients.GetInactiveClientsSinceAsync(date);
+        return Ok(clients);
+    }
+    
+    // GET api/exercises/19/monthly-sales
+    [HttpGet("19/monthly-sales")]
+    public async Task<IActionResult> GetMonthlySales()
+    {
+        var sales = await _unitOfWork.Orders.GetMonthlySalesAsync();
+        return Ok(sales);
     }
 }
