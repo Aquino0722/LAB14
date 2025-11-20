@@ -1,9 +1,22 @@
 {
-  "_comment": "Este proyecto NO es compatible con Vercel. Vercel no soporta aplicaciones .NET/ASP.NET Core. Por favor, elimina este proyecto de Vercel y usa Azure, Railway, Render o Fly.io para desplegar.",
-  "buildCommand": null,
-  "installCommand": null,
-  "framework": null,
-  "outputDirectory": null,
-  "ignoreCommand": "true"
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api/index"
+    }
+  ],
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "ASPNETCORE_ENVIRONMENT": "Production"
+  }
 }
-

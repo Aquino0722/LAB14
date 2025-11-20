@@ -4,21 +4,55 @@ Proyecto ASP.NET Core Web API con Entity Framework Core y MySQL.
 
 ## 🚀 Despliegue
 
-### ⚠️ Importante sobre Vercel
+### 🚀 Desplegar en Vercel (Solución con Proxy)
 
-**Vercel NO soporta aplicaciones .NET/ASP.NET Core de forma nativa.** Vercel está diseñado principalmente para aplicaciones JavaScript/TypeScript y funciones serverless.
+Aunque Vercel NO soporta .NET directamente, hemos configurado una **solución con proxy serverless** que te permite usar Vercel.
 
-Si intentas desplegar en Vercel, recibirás el error:
-```
-sh: line 1: dotnet: command not found
-```
+#### ¿Cómo funciona?
 
-**Para eliminar el proyecto de Vercel:**
+1. **Despliega tu API .NET en Railway/Render** (gratis y fácil):
+   - Railway: https://railway.app
+   - Render: https://render.com
+   - Azure: https://portal.azure.com
+
+2. **Obtén la URL de tu API .NET desplegada**:
+   ```
+   https://tu-api-dotnet.railway.app
+   ```
+
+3. **Configura la variable de entorno en Vercel**:
+   - Ve a Vercel Dashboard → Tu Proyecto → Settings → Environment Variables
+   - Agrega: `API_NET_URL` = `https://tu-api-dotnet.railway.app`
+   - Aplica a Production, Preview y Development
+
+4. **Redespliega en Vercel**:
+   - El proxy serverless (`api/index.js`) redirigirá todas las peticiones a tu API .NET
+
+#### Ventajas:
+- ✅ Funciona con Vercel
+- ✅ Mantienes las ventajas de Vercel (CDN, edge functions)
+- ✅ Tu API .NET corre en una plataforma nativa (eficiente)
+
+#### Pasos detallados:
+
+**Paso 1: Desplegar API .NET en Railway**
+1. Ve a https://railway.app
+2. Conecta tu GitHub
+3. Selecciona el repositorio LAB14
+4. Railway detectará .NET automáticamente
+5. Configura la variable de entorno `MySQLConnection`
+6. Espera a que se despliegue y copia la URL
+
+**Paso 2: Configurar Vercel**
 1. Ve a https://vercel.com/dashboard
 2. Selecciona el proyecto LAB14
-3. Ve a Settings → General
-4. Desplázate hasta "Delete Project" y elimínalo
-5. O desconecta el repositorio de GitHub en Settings → Git
+3. Ve a Settings → Environment Variables
+4. Agrega: `API_NET_URL` con la URL de Railway
+5. Guarda y redespliega
+
+**Paso 3: ¡Listo!**
+- Tu API estará disponible en Vercel
+- Todas las peticiones se redirigen automáticamente a Railway
 
 ### ✅ Alternativas Recomendadas para .NET
 
