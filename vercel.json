@@ -1,0 +1,9 @@
+{
+  "_comment": "Este proyecto NO es compatible con Vercel. Vercel no soporta aplicaciones .NET/ASP.NET Core. Por favor, elimina este proyecto de Vercel y usa Azure, Railway, Render o Fly.io para desplegar.",
+  "buildCommand": null,
+  "installCommand": null,
+  "framework": null,
+  "outputDirectory": null,
+  "ignoreCommand": "true"
+}
+

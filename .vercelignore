@@ -1,0 +1,4 @@
+# Vercel no soporta aplicaciones .NET
+# Este proyecto usa .NET 8.0 y debe ser desplegado en Azure, Railway, Render, u otra plataforma compatible con .NET
+*
+

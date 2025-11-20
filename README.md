@@ -13,6 +13,13 @@ Si intentas desplegar en Vercel, recibirás el error:
 sh: line 1: dotnet: command not found
 ```
 
+**Para eliminar el proyecto de Vercel:**
+1. Ve a https://vercel.com/dashboard
+2. Selecciona el proyecto LAB14
+3. Ve a Settings → General
+4. Desplázate hasta "Delete Project" y elimínalo
+5. O desconecta el repositorio de GitHub en Settings → Git
+
 ### ✅ Alternativas Recomendadas para .NET
 
 #### 1. **Azure App Service** (Recomendado para .NET)
