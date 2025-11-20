@@ -4,55 +4,56 @@ Proyecto ASP.NET Core Web API con Entity Framework Core y MySQL.
 
 ## 🚀 Despliegue
 
-### 🚀 Desplegar en Vercel (Solución con Proxy)
+### 🚀 Desplegar en Render (GRATIS) - RECOMENDADO
 
-Aunque Vercel NO soporta .NET directamente, hemos configurado una **solución con proxy serverless** que te permite usar Vercel.
+Render tiene un **plan gratuito** perfecto para desplegar aplicaciones .NET. Tu proyecto ya está configurado para Render.
 
-#### ¿Cómo funciona?
+#### ✅ Archivos Configurados
 
-1. **Despliega tu API .NET en Railway/Render** (gratis y fácil):
-   - Railway: https://railway.app
-   - Render: https://render.com
-   - Azure: https://portal.azure.com
+- ✅ `render.yaml` - Configuración para Render
+- ✅ `Program.cs` - Configurado para usar el puerto de Render
+- ✅ Swagger habilitado en producción
 
-2. **Obtén la URL de tu API .NET desplegada**:
-   ```
-   https://tu-api-dotnet.railway.app
-   ```
+#### 📝 Pasos Rápidos:
 
-3. **Configura la variable de entorno en Vercel**:
-   - Ve a Vercel Dashboard → Tu Proyecto → Settings → Environment Variables
-   - Agrega: `API_NET_URL` = `https://tu-api-dotnet.railway.app`
-   - Aplica a Production, Preview y Development
+1. **Crear cuenta en Render:**
+   - Ve a https://render.com
+   - Crea una cuenta gratuita (puedes usar GitHub)
 
-4. **Redespliega en Vercel**:
-   - El proxy serverless (`api/index.js`) redirigirá todas las peticiones a tu API .NET
+2. **Crear Web Service:**
+   - Haz clic en "New +" → "Web Service"
+   - Conecta tu GitHub y selecciona `Aquino0722/LAB14`
+   - Configura:
+     - **Name**: `lablinq-api`
+     - **Root Directory**: `LabLINQ` ⚠️ IMPORTANTE
+     - **Build Command**: `dotnet restore && dotnet publish -c Release -o ./publish`
+     - **Start Command**: `dotnet ./publish/LabLINQ.dll`
+     - **Plan**: **Free** (gratis)
 
-#### Ventajas:
-- ✅ Funciona con Vercel
-- ✅ Mantienes las ventajas de Vercel (CDN, edge functions)
-- ✅ Tu API .NET corre en una plataforma nativa (eficiente)
+3. **Configurar Variables de Entorno:**
+   - `ASPNETCORE_ENVIRONMENT` = `Production`
+   - `ASPNETCORE_URLS` = `http://0.0.0.0:10000`
+   - `ConnectionStrings__MySQLConnection` = Tu cadena de conexión MySQL
+     - ⚠️ Usa `__` (doble guión bajo) para configuración anidada
 
-#### Pasos detallados:
+4. **Desplegar:**
+   - Haz clic en "Create Web Service"
+   - Espera 5-10 minutos
+   - Obtén tu URL: `https://lablinq-api.onrender.com`
 
-**Paso 1: Desplegar API .NET en Railway**
-1. Ve a https://railway.app
-2. Conecta tu GitHub
-3. Selecciona el repositorio LAB14
-4. Railway detectará .NET automáticamente
-5. Configura la variable de entorno `MySQLConnection`
-6. Espera a que se despliegue y copia la URL
+📖 **Guía Completa**: Ver `DEPLOY-RENDER.md` para instrucciones detalladas paso a paso
 
-**Paso 2: Configurar Vercel**
-1. Ve a https://vercel.com/dashboard
-2. Selecciona el proyecto LAB14
-3. Ve a Settings → Environment Variables
-4. Agrega: `API_NET_URL` con la URL de Railway
-5. Guarda y redespliega
+#### 🎯 Opción Alternativa: Vercel como Proxy
 
-**Paso 3: ¡Listo!**
-- Tu API estará disponible en Vercel
-- Todas las peticiones se redirigen automáticamente a Railway
+Si quieres usar Vercel como punto de entrada (proxy a Render):
+
+1. **Despliega en Render** (pasos arriba) ✅
+2. **Configura Vercel:**
+   - Ve a Vercel Dashboard → Settings → Environment Variables
+   - Agrega: `API_NET_URL` = `https://tu-api.onrender.com`
+   - Redespliega en Vercel
+
+El proxy serverless (`api/index.js`) redirigirá todas las peticiones a tu API .NET en Render.
 
 ### ✅ Alternativas Recomendadas para .NET
 

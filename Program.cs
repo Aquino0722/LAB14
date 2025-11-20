@@ -30,14 +30,18 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // 2. Configurar el pipeline de HTTP
-if (app.Environment.IsDevelopment())
+// Habilitar Swagger en producción para Render (opcional, comentar si no lo necesitas)
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "LabLINQ API v1");
+    c.RoutePrefix = string.Empty; // Swagger UI en la raíz
+});
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+// Configurar el puerto para Render (variable de entorno PORT)
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Run($"http://0.0.0.0:{port}");
